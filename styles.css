@@ -271,6 +271,7 @@ nav {
 }
 
 .info-title h1 {
+  font-family: Montserrat;
   font-size: 48px;
   margin-bottom: 32px;
 }
@@ -315,7 +316,6 @@ nav {
 }
 
 .info-box-text p {
-  font-family: Inter;
   font-size: 14px;
 }
 
@@ -356,6 +356,11 @@ nav {
 .about-us-info h1 {
   margin-bottom: 40px;
   font-size: 48px;
+  font-family: Montserrat;
+}
+
+.about-us-info h1 span {
+  font-family: Inter;
 }
 
 .about-us-info p {
@@ -523,8 +528,15 @@ nav {
   gap: 64px;
 }
 
-.social-banner-title h2 {
+.social-banner-title h1 {
   font-size: 40px;
+  font-weight: 400;
+  font-family: Montserrat;
+}
+
+.social-banner-title h1 span {
+  font-family: Inter;
+  font-weight: 500;
 }
 
 .social-banner-info {

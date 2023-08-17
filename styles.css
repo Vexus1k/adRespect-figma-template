@@ -719,6 +719,10 @@ nav {
     width: 90%;
   }
 
+  .info-boxes {
+    justify-content: center;
+  }
+
   /* About us */
 
   .about-us-container {

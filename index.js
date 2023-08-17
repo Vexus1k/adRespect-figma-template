@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   var gallery = document.querySelector(".gallery");
   var masonry = new Masonry(gallery, {
     itemSelector: ".gallery-item",
@@ -8,22 +8,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   var gallery = document.querySelector(".gallery");
   var expandButton = document.querySelector(".expand-button");
   var expandButtonContent = document.querySelector(".expand-button-content");
 
   gallery.style.maxHeight = "1475px";
 
-  function toggleGallery() {
+  toggleGallery = () => {
     if (gallery.style.maxHeight === "1475px") {
-      expandButton.classList.add("expanded");
       gallery.style.maxHeight = gallery.scrollHeight + "px";
       expandButtonContent.textContent = "Zwiń";
+
+      expandButton.classList.add("expanded");
     } else {
       gallery.style.maxHeight = 1475 + "px";
-      expandButton.classList.remove("expanded");
       expandButtonContent.textContent = "Rozwiń";
+
+      expandButton.classList.remove("expanded");
     }
   }
 
@@ -32,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const galleryItems = document.querySelectorAll(".gallery-item");
   const popup = document.querySelector(".popup");
   const popupImage = document.querySelector(".popup-image");
@@ -46,21 +48,22 @@ document.addEventListener("DOMContentLoaded", function () {
   galleryItems.forEach((item, index) => {
     item.addEventListener("click", () => {
       currentImageIndex = index;
+
       openPopupWithImage(currentImageIndex);
     });
   });
 
-  function openPopupWithImage(index) {
+  openPopupWithImage = (index) => {
     popupImage.src = galleryItems[index].src;
     popup.style.display = "block";
   }
 
-  function navigateToNextImage() {
+  navigateToNextImage = () => {
     currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
     openPopupWithImage(currentImageIndex);
   }
 
-  function navigateToPrevImage() {
+  navigateToPrevImage = () => {
     currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
     openPopupWithImage(currentImageIndex);
   }
@@ -72,24 +75,28 @@ document.addEventListener("DOMContentLoaded", function () {
   nextButton.addEventListener("click", navigateToNextImage);
   prevButton.addEventListener("click", navigateToPrevImage);
 
-  function openPopupWithImage(index) {
+  openPopupWithImage = (index) => {
     currentImageIndex = index;
     const image = new Image();
     image.src = galleryItems[index].src;
-    image.onload = function () {
+
+    image.onload = () => {
       popupImage.src = galleryItems[index].src;
       popup.style.display = "flex";
+
       updateThumbnailVisibility();
     };
   }
 
-  function generateThumbnails() {
+  generateThumbnails = () => {
     const thumbnailsContainer = document.querySelector(".thumbnails");
 
     galleryItems.forEach((item, index) => {
       const thumbnail = document.createElement("div");
+
       thumbnail.classList.add("thumbnail");
       thumbnail.innerHTML = `<img src="${item.src}" alt="Thumbnail ${index}">`;
+
       thumbnail.addEventListener("click", () => {
         openPopupWithImage(index);
       });
@@ -97,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function updateThumbnailVisibility() {
+  updateThumbnailVisibility = () => {
     thumbnails = thumbnailsContainer.querySelectorAll(".thumbnail");
 
     thumbnails.forEach((thumbnail, index) => {
@@ -112,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
   generateThumbnails();
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const offerItem = document.getElementById('offer');
   const mobileOfferItem = document.getElementById('mobile-offer');
@@ -123,8 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
     offerItem.classList.toggle('active');
     
     if (offerItem.classList.contains('active')) {
-        const offerItemHeight = offerItem.clientHeight;
-        submenu.style.top = `${offerItemHeight}px`;
+      const offerItemHeight = offerItem.clientHeight;
+      submenu.style.top = `${offerItemHeight}px`;
     }
   });
 
@@ -132,11 +138,10 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileOfferItem.classList.toggle('active');
     
     if (mobileOfferItem.classList.contains('active')) {
-        const mobileOfferItemHeight = mobileOfferItem.clientHeight;
-        mobileSubmenu.style.top = `${mobileOfferItemHeight}px`;
+      const mobileOfferItemHeight = mobileOfferItem.clientHeight;
+      mobileSubmenu.style.top = `${mobileOfferItemHeight}px`;
     }
   });
-
 
   window.addEventListener('click', (event) => {
     if (offerItem.classList.contains('active') && !offerItem.contains(event.target)) {
@@ -175,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const toggleSearchActive = () => {
     searchIcon.classList.toggle('active');
+
     if (searchIcon.classList.contains('active')) {
       searchInput.focus();
     } else {
@@ -184,6 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const toggleMobileSearchActive = () => {
     mobileSearchIcon.classList.toggle('active');
+
     if (mobileSearchIcon.classList.contains('active')) {
       mobileSearchInput.focus();
     } else {
@@ -232,10 +239,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const aboutUsImageWrapper = document.querySelector(".about-us-image-wrapper");
-  const gardenImageWrapper = document.querySelector(".garden-image-wrapper");
+  const gardenImagesWrapper = document.querySelectorAll(".garden-image-wrapper");
 
-  function handleAboutUsScrollAnimation() {
+  handleAboutUsScrollAnimation = () => {
     const boundingRect = aboutUsImageWrapper.getBoundingClientRect();
+
     if (boundingRect.top <= window.innerHeight && boundingRect.bottom >= 0) {
       aboutUsImageWrapper.style.animation = "slideInLeft 1s ease-out";
     } else {
@@ -243,12 +251,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function handleGardenScrollAnimation() {
-    const boundingRect = gardenImageWrapper.getBoundingClientRect();
+  handleGardenScrollAnimation = () => {
+    const boundingRect = gardenImagesWrapper[0].getBoundingClientRect();
+
     if (boundingRect.top <= window.innerHeight && boundingRect.bottom >= 0) {
-      gardenImageWrapper.style.animation = "slideInRight 1s ease-out";
+      gardenImagesWrapper.forEach((gardenImageWrapper) => {
+        gardenImageWrapper.style.animation = "slideInRight 1s ease-out";
+      });
     } else {
-      gardenImageWrapper.style.animation = "none";
+      gardenImagesWrapper.forEach((gardenImageWrapper) => {
+        gardenImageWrapper.style.animation = "none";
+      });
     }
   }
 
@@ -261,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenu = document.getElementById('mobile-menu');
 
   hamburgerIcon.addEventListener('click', () => {
-      mobileMenu.classList.toggle('show');
+    mobileMenu.classList.toggle('show');
   });
 });
 
@@ -291,12 +304,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const slides = sliderContainer.querySelectorAll('.garden-container');
     let currentSlide = 0;
   
-    function showSlide(slideIndex) {
+    showSlide = (slideIndex) => {
       slides.forEach((slide, index) => {
         if (index === slideIndex) {
-          slide.style.display = 'flex';
-          slide.classList.add('active');
           sliderContainer.style.height = slide.offsetHeight + 'px';
+          slide.style.display = 'flex';
+  
+          slide.classList.add('active');
         } else {
           slide.classList.remove('active');
         }
@@ -307,11 +321,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (index % 2 === 0) {
         button.addEventListener('click', () => {
           currentSlide = (currentSlide + 1) % slides.length;
+
           showSlide(currentSlide);
         });
       } else {
         button.addEventListener('click', () => {
           currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+
           showSlide(currentSlide);
         });
       }
